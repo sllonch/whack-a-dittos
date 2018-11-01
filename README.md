@@ -29,7 +29,7 @@ Game() {
 }
 
 Game.prototype.start = function () {
-  this.gameScreen
+  this.gameScreen = buildDOM
   this.timeLeftElement
   this.livesLeftElement
   this.scoreElement 
@@ -45,7 +45,9 @@ Game.prototype.startTimer = function() {
   this.timeLeft = 30;
   this.timeElement.innerText = this.timeLeft;
 
-  this.intervalId = setInterval(function() { })
+  this.intervalId = setInterval(function() { 
+  
+  },1000);
 }
 
 Game.prototype.createDiglett = function() {
@@ -57,7 +59,7 @@ Game.prototype.createDitto = function() {
 Game.prototype.killDiglett = function() {	
 }
 
-Game.prototype.killDitto = function {
+Game.prototype.killDitto = function() {
 }
 
 Game.prototype.setGameOverCallback = function(callback) {
