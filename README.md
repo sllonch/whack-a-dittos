@@ -112,10 +112,12 @@ Definition of the different states and their transition (transition functions)
 - Main - destroyGameScreen
 - Main - build GameOverScreen
 - Main - addEventListener restartButton
-- Game - create Grid
-- Game - create GridElements and digletts/dittos in random positions 
-- Game - kill Diglett 
-- Game - kill Ditto
+- Game - Grid
+- Game - GridElements and digletts/dittos in random positions 
+- Game - createDitto
+- Game - createDiglett
+- Game - killDitto
+- Game - killDiglett
 - Game - lives 
 - Game - gameOver
 
