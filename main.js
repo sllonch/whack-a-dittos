@@ -20,7 +20,10 @@ function main() {
   function buildSplash() {
     splashScreen = buildDOM(`
       <main>
-        <h1>Up or down</h1>
+        <h1>Whack-a-dittos</h1>
+        <ul>Instructions:</ul>
+        <li>Hit all the Dittos that are impersonating our beloved Diglett</li>
+        <li>If you hit a Diglett by mistake, you lose one live!</li>
         <button>Start</button>
       </main>
     `)
@@ -60,6 +63,7 @@ function main() {
     gameOverScreen = buildDOM(`
       <main>
         <h1>Game Over</h1>
+        <p>Your final score: </p><span class="score"></span>
         <button>Restart</button>
       </main>  
     `);

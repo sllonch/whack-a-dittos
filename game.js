@@ -1,49 +1,47 @@
 function Game() {
-  this.score = 0;
-  this.step = 0;
-  this.cards = [1, 3, 2, 4];
+  //this.onGameOverCallback
   this.timeLeft = null;
+  this.lives = 0; 
+  this.score = 0;  
+  this.grid = [];
+  this.gridElementTypes = []; 
+  this.level = 1;
 }
 
 Game.prototype.start = function() {
 
   this.gameScreen = buildDOM(`
     <main>
+      <h1>Whack-a-dittos</h1>
       <header>
+        <p>Countdown: <span class="time"></span></p>
+        <p>Lives: <span class="lives"></span></p>
         <p>Score: <span class="score"></span></p>
-        <p>Time: <span class="time"></span></p>
       </header>
-      <section class="game">
-        <p class="left"></p>
-        <button class="btn up">UP</button>
-        <button class="btn down">DOWN</button>
-        <p class="right"></p>
+      <section class="grid">
       </section>
       <footer>
-        <p> Step <span class="step"></span> / 3</p>
+        <p> Level <span class="level"></span></p>
       </footer>
     </main>
   `);
 
   document.body.prepend(this.gameScreen);
 
-  this.scoreElement = this.gameScreen.querySelector('.score');
-  this.scoreElement.innerText = this.score;
-
   this.timeElement = this.gameScreen.querySelector('.time');
   this.timeElement.innerText = 0;
 
-  this.stepElement = this.gameScreen.querySelector('.step');
-  this.stepElement.innerText = this.step + 1;
+  this.livesElement = this.gameScreen.querySelector('.lives');
+  this.livesElement.innerText = this.lives;
 
-  this.leftNumberElement = this.gameScreen.querySelector('.left');
-  this.rightNumberElement = this.gameScreen.querySelector('.right');
+  this.scoreElement = this.gameScreen.querySelector('.score');
+  this.scoreElement.innerText = this.score;
 
-  this.buttonUpElement = this.gameScreen.querySelector('.btn.up');
-  this.buttonDownElement = this.gameScreen.querySelector('.btn.down');
+  this.gridElement = this.gameScreen.querySelector('.grid');
+  this.gridElement = this.grid;
 
-  this.leftNumberElement.innerText = this.cards[this.step]
-
+  this.levelElement = this.gameScreen.querySelector('.level');
+  this.levelElement.innerText = this.level;
 
   this.startTimer();
 
@@ -51,7 +49,7 @@ Game.prototype.start = function() {
 
 Game.prototype.startTimer = function() {
 
-  this.timeLeft = 3;
+  this.timeLeft = 30;
   this.timeElement.innerText = this.timeLeft;
 
   this.intervalId = setInterval(function() {
@@ -60,7 +58,7 @@ Game.prototype.startTimer = function() {
 
     if (this.timeLeft === 0) {
       clearInterval(this.intervalId);
-      this.nextCard();
+      this.finishGame();
     }
 
   }.bind(this), 1000)
@@ -75,9 +73,6 @@ Game.prototype.nextCard = function() {
   
   this.leftNumberElement.innerText = this.cards[this.step];
   this.startTimer();
-
-  
-
 }
 
 Game.prototype.checkAnswer = function() {

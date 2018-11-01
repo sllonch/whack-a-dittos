@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Whack-a-dittos
 
 ## Description
@@ -292,4 +291,3 @@ URls for the project repo and deploy
 ### Slides
 URls for the project presentation (slides)
 [Link Slides.com](http://slides.com)
->>>>>>> df7835121001effd483c20c78517405b1b877ebc
