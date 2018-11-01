@@ -12,15 +12,22 @@ function main() {
   var gameScreen;
   var gameOverScreen;
 
+  var logoElement;
+  var ulElement;
+  var liElement;
   var startButton;
   var restartButton;
+
+  var pElement;
+
+
 
   var livesElement;
   
   function buildSplash() {
     splashScreen = buildDOM(`
       <main>
-        <h1>Whack-a-dittos</h1>
+        <img src="images/logo.png" alt="Whack-a-ditto logo">
         <ul>Instructions:</ul>
         <li>Hit all the Dittos that are impersonating our beloved Diglett</li>
         <li>If you hit a Diglett by mistake, you lose one live!</li>
@@ -30,7 +37,18 @@ function main() {
 
     document.body.prepend(splashScreen);
 
+    logoElement = document.querySelector('img');
+    logoElement.classList.add('logo');
+
+    ulElement = document.querySelector('ul');
+    ulElement.classList.add('text');
+
+    liElement = document.querySelectorAll('li');
+    liElement[0].classList.add('text');
+    liElement[1].classList.add('text');
+
     startButton = document.querySelector('button');
+    startButton.classList.add('btn');
 
     startButton.addEventListener('click', destroySplash);
   }
@@ -62,7 +80,7 @@ function main() {
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
       <main>
-        <h1>Game Over</h1>
+        <img src="images/gameOver.png" alt="Whack-a-ditto logo">
         <p>Your final score: </p><span class="score"></span>
         <button>Restart</button>
       </main>  
@@ -70,7 +88,14 @@ function main() {
 
     document.body.prepend(gameOverScreen);
 
+    logoElement = document.querySelector('img');
+    logoElement.classList.add('logo');
+
+    pElement = document.querySelector('p');
+    pElement.classList.add('text');
+
     restartButton = document.querySelector('button');
+    restartButton.classList.add('btn');
 
     restartButton.addEventListener('click', destroyGameOverScreen)
 

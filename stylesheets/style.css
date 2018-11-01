@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Digi";
+  src: url("fonts/ds-digib.ttf");
+}
+@font-face {
+  font-family: "PokeSolid";
+  src: url("fonts/Pokemon\ Solid.ttf");
+}
+@font-face {
+  font-family: "PokeHollow";
+  src: url("fonts/Pokemon\ Hollow.ttf");
+}
+
+/* ---- reset ---- */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: red;
+}
+
+.logo {        
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text {
+  text-align: center;
+  font-family: "PokeSolid";
+  font-size: 20px;
+}
+
+.btn {
+  text-align: center;
+  font-family: "PokeSolid";
+  font-size: 10px; 
+  display: inline-block;       
+  margin: 0 auto;
+  width: 200px; 
+}
