@@ -4,7 +4,7 @@
 Whack-a-diglett is a simple click game where you have to smash the Dittos that are trying to impersonate Diglett. Every smashed Ditto adds points into your scoreboard… but careful: if you are wrong and you smash our lovely Diglett by mistake, you die.
 
 
-## MVP (DOM - CANVAS)
+## MVP (DOM)
 *DOM*
 The MVP version will be the first level of the game: with only 5 holes, a scoreboard and a countdown timer.
 
@@ -23,8 +23,8 @@ Game() {
   this.timeLeft
   this.lives 
   this.score  
-  this.grid = {}
-  this.gridElements = {}
+  this.grid = []
+  this.gridElementTypes = [] 
   this.level
 }
 
@@ -56,6 +56,9 @@ Game.prototype.createDiglett = function() {
 Game.prototype.createDitto = function() {
 }
 
+Game.prototype.checkHit = function() {
+}
+
 Game.prototype.killDiglett = function() {	
 }
 
@@ -72,10 +75,6 @@ Game.prototype.finishGame = function() {
 }
 
 ```
-
-
-
-
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
@@ -116,6 +115,7 @@ Definition of the different states and their transition (transition functions)
 - Game - GridElements and digletts/dittos in random positions 
 - Game - createDitto
 - Game - createDiglett
+- Game - checkHit
 - Game - killDitto
 - Game - killDiglett
 - Game - lives 
