@@ -102,22 +102,27 @@ Definition of the different states and their transition (transition functions)
 ## Task
 - create files javascript
 - Main - buildDom
+- Main - main
 - Main - buildSplash
-- Main - addEventListener
+- Main - addEventListener startButton
 - Main - destroySplash
-- Game - buildDom
-- Game - TimeOut test
-- Main - GameOver
-- Main - destroy Game
-- Main - GameOver RESTART
-- Main - removeGameOver
-- Game - addEventListener
-- Game - create grid
-- Game - create gridElements and digletts/dittos position 
+- Main - buildGameScreen
+- Game - start (buildDom)
+- Game - startTimer
+- Main - destroyGameScreen
+- Main - build GameOverScreen
+- Main - addEventListener restartButton
+- Game - create Grid
+- Game - create GridElements and digletts/dittos in random positions 
 - Game - kill Diglett 
 - Game - kill Ditto
 - Game - lives 
 - Game - gameOver
+
+*Backlog*
+- Game - nextLevel
+- Game - add differents GameOverScreen
+- Game - add sprites
 
 
 
