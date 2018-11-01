@@ -15,12 +15,12 @@ function main() {
   var logoElement;
   var ulElement;
   var liElement;
+  var divElement;
   var startButton;
-  var restartButton;
 
   var pElement;
-
-
+  var div2Element;
+  var restartButton;
 
   var livesElement;
   
@@ -31,7 +31,9 @@ function main() {
         <ul>Instructions:</ul>
         <li>Hit all the Dittos that are impersonating our beloved Diglett</li>
         <li>If you hit a Diglett by mistake, you lose one live!</li>
-        <button>Start</button>
+        <div>
+          <input class="button type="button" value="Start">
+        </div>
       </main>
     `)
 
@@ -47,8 +49,11 @@ function main() {
     liElement[0].classList.add('text');
     liElement[1].classList.add('text');
 
-    startButton = document.querySelector('button');
-    startButton.classList.add('btn');
+    divElement = document.querySelector('div');
+    divElement.classList.add('center');
+
+    startButton = document.querySelector('input');
+    startButton.classList.add('button');
 
     startButton.addEventListener('click', destroySplash);
   }
@@ -82,7 +87,9 @@ function main() {
       <main>
         <img src="images/gameOver.png" alt="Whack-a-ditto logo">
         <p>Your final score: </p><span class="score"></span>
-        <button>Restart</button>
+        <div>
+          <input class="button type="button" value="Start">
+        </div>
       </main>  
     `);
 
@@ -94,8 +101,11 @@ function main() {
     pElement = document.querySelector('p');
     pElement.classList.add('text');
 
-    restartButton = document.querySelector('button');
-    restartButton.classList.add('btn');
+    div2Element = document.querySelector('div');
+    div2Element.classList.add('center');
+
+    restartButton = document.querySelector('input');
+    restartButton.classList.add('button');
 
     restartButton.addEventListener('click', destroyGameOverScreen)
 

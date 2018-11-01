@@ -38,11 +38,53 @@ body {
   font-size: 20px;
 }
 
-.btn {
-  text-align: center;
+.button{
+  display: inline-block;
+  padding: 15px;
+  margin-right: 5px;
+  height: 50px;
+  min-width: 100px;
+  background: #348AA7;
+  border: none;
+  outline: none;
+  color: white;
   font-family: "PokeSolid";
-  font-size: 10px; 
-  display: inline-block;       
+  text-align:center;
+  font-weight: 400;
+  font-size: 20px;
+  border-radius: 3px;
+  box-shadow: 0 5px 0px darken(#348AA7,0%);
+  border-bottom: 2px solid darken(#348AA7,3%);
+}
+  
+.button:hover{
+  background: darken(#348AA7,5%);
+  box-shadow: 0 4px 1px darken(#348AA7,5%);
+  border-bottom: 2px solid darken(#348AA7,8%);
+  transition: all 0.1s ease-in;
+  }
+  
+.button:active{
+  transform:translateY(4px);
+  border-bottom-width: 2px;
+  box-shadow: none;
+}
+
+.center {
+  text-align: center;
   margin: 0 auto;
+}
+
+.container-grid {
+  text-align: center;
+  width: 1000px;
+  height: 1000px;
+  overflow: auto;
+  border: 1px solid;
+}
+
+.grid-element {
+  float: left;
   width: 200px; 
+  height: 200x;
 }
