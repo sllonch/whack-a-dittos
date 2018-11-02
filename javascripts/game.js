@@ -57,10 +57,11 @@ Game.prototype.start = function() {
   this.timeElement.innerText = 0;
 
   this.livesNoElement = this.gameScreen.querySelector('.livesNumber');
-  this.livesNoElement.innerText = this.lives;
+  this.livesNoElement.innerText = 2;
 
+  //this.score = 0; 
   this.scoreNoElement = this.gameScreen.querySelector('.scoreNumber');
-  this.scoreNoElement.innerText = this.score;
+  this.scoreNoElement.innerText = 0
 
   this.gridElement = this.gameScreen.querySelectorAll('.grid-image');
 
@@ -83,6 +84,12 @@ Game.prototype.start = function() {
   this.levelNoElement = this.gameScreen.querySelector('.levelNumber');
   this.levelNoElement.innerText = this.level;
 
+  this.handleClick = function(event){
+    this.checkHit(event);
+  }.bind(this)
+
+  document.addEventListener('click', this.handleClick);
+
   this.startTimer();
 }
 
@@ -96,12 +103,12 @@ Game.prototype.startTimer = function() {
     this.timeLeft--;
     this.timeElement.innerText = this.timeLeft;
 
-    if(this.timeLeft === 17) this.createDitto(this.dittoPositions[0]);
-    if(this.timeLeft === 14) this.createDitto(this.dittoPositions[1]);
-    if(this.timeLeft === 11) this.createDitto(this.dittoPositions[2]);
-    if(this.timeLeft === 8) this.createDitto(this.dittoPositions[3]);
-    if(this.timeLeft === 5) this.createDitto(this.dittoPositions[4]);
-
+    if(this.timeLeft === 18) this.createDitto(this.dittoPositions[0]);
+    if(this.timeLeft === 15) this.createDitto(this.dittoPositions[1]);
+    if(this.timeLeft === 12) this.createDitto(this.dittoPositions[2]);
+    if(this.timeLeft === 9) this.createDitto(this.dittoPositions[3]);
+    if(this.timeLeft === 6) this.createDitto(this.dittoPositions[4]);
+    if(this.timeLeft === 3) this.createDitto(this.dittoPositions[0]);
 
     if (this.timeLeft === 0) {
       clearInterval(this.intervalId);
@@ -113,35 +120,30 @@ Game.prototype.startTimer = function() {
 
 Game.prototype.createDitto = function(position) {  
   this.gridElement[position].classList.add('ditto');
-  this.checkHit(position);
 }
 
-Game.prototype.checkHit = function(position) {
-  debugger;
-  this.gridElement[position].addEventListener('click', this.killDitto(position));
-}
-
-Game.prototype.killDitto = function(position) {
-  debugger;
-  this.gridElement[position].classList.add('hole');
-  this.score += 25;
-
-}
-
-Game.prototype.nextCard = function() {
-  this.step++;
-
-  if (this.step === this.cards.length) {
-    this.finishGame();
+Game.prototype.checkHit = function(event) {
+  this.target = event.target;
+  if(this.target.classList.contains('ditto')) { 
+    this.target.classList.remove('ditto');
+    this.score = this.score + 25;
+    this.scoreNoElement.innerText = this.score;
+  } else if(this.target.classList.contains('diglett')) { 
+    this.target.classList.remove('diglett');
+    this.lives--;
+    this.livesNoElement.innerText = this.lives;
   }
-  
-  this.leftNumberElement.innerText = this.cards[this.step];
-  this.startTimer();
 }
 
-Game.prototype.checkAnswer = function() {
+//Game.prototype.score = function() {
+  //this.addScore = 25;
+  //this.scoreNoElement.innerText = this.addScore;
+//}
 
-}
+//Game.prototype.killDitto = function() {
+//  this.gridElement[position].classList.add('hole');
+//  this.score += 25;
+//}
 
 Game.prototype.setGameOverCallback = function(callback) {
   this.gameOverCallback = callback;
