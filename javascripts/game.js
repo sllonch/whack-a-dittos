@@ -65,7 +65,7 @@ Game.prototype.start = function() {
   this.gridElement = this.gameScreen.querySelectorAll('.grid-image');
 
   this.holePositions = [];
-  debugger;
+  
   while(this.holePositions.length < 5) {
       this.randomnumber = Math.floor(Math.random() * 24);
       if(this.holePositions.indexOf(this.randomnumber) > -1) continue;
@@ -77,7 +77,6 @@ Game.prototype.start = function() {
   }
 
   for(j = 0; j < 5; j++) {
-    debugger;
     this.gridElement[this.holePositions[j]].classList.add('hole');
   }
 
@@ -85,23 +84,48 @@ Game.prototype.start = function() {
   this.levelNoElement.innerText = this.level;
 
   this.startTimer();
-
 }
 
 Game.prototype.startTimer = function() {
-  this.timeLeft = 30;
+  this.timeLeft = 20;
   this.timeElement.innerText = this.timeLeft;
+
+  this.dittoPositions = this.holePositions;
 
   this.intervalId = setInterval(function() {
     this.timeLeft--;
     this.timeElement.innerText = this.timeLeft;
+
+    if(this.timeLeft === 17) this.createDitto(this.dittoPositions[0]);
+    if(this.timeLeft === 14) this.createDitto(this.dittoPositions[1]);
+    if(this.timeLeft === 11) this.createDitto(this.dittoPositions[2]);
+    if(this.timeLeft === 8) this.createDitto(this.dittoPositions[3]);
+    if(this.timeLeft === 5) this.createDitto(this.dittoPositions[4]);
+
 
     if (this.timeLeft === 0) {
       clearInterval(this.intervalId);
       this.finishGame();
     }
 
-  }.bind(this), 1000)
+  }.bind(this), 1000);
+}
+
+Game.prototype.createDitto = function(position) {  
+  this.gridElement[position].classList.add('ditto');
+  this.checkHit(position);
+}
+
+Game.prototype.checkHit = function(position) {
+  debugger;
+  this.gridElement[position].addEventListener('click', this.killDitto(position));
+}
+
+Game.prototype.killDitto = function(position) {
+  debugger;
+  this.gridElement[position].classList.add('hole');
+  this.score += 25;
+
 }
 
 Game.prototype.nextCard = function() {
