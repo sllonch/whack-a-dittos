@@ -27,20 +27,17 @@ function main() {
   function buildSplash() {
     splashScreen = buildDOM(`
       <main>
-        <img src="images/logo.png" alt="Whack-a-ditto logo">
+      <img class="logo" alt="Whack-a-ditto logo">
         <ul>Instructions:</ul>
         <li>Hit all the Dittos that are impersonating our beloved Diglett</li>
         <li>If you hit a Diglett by mistake, you lose one live!</li>
-        <div>
-          <input class="button type="button" value="Start">
+        <div class="center">
+          <input class="button" type="button" value="Start">
         </div>
       </main>
     `)
 
     document.body.prepend(splashScreen);
-
-    logoElement = document.querySelector('img');
-    logoElement.classList.add('logo');
 
     ulElement = document.querySelector('ul');
     ulElement.classList.add('text');
@@ -49,11 +46,7 @@ function main() {
     liElement[0].classList.add('text');
     liElement[1].classList.add('text');
 
-    divElement = document.querySelector('div');
-    divElement.classList.add('center');
-
     startButton = document.querySelector('input');
-    startButton.classList.add('button');
 
     startButton.addEventListener('click', destroySplash);
   }
@@ -85,27 +78,17 @@ function main() {
   function buildGameOverScreen() {
     gameOverScreen = buildDOM(`
       <main>
-        <img src="images/gameOver.png" alt="Whack-a-ditto logo">
-        <p>Your final score: </p><span class="score"></span>
-        <div>
-          <input class="button type="button" value="Start">
+        <img class="logo" alt="Game Over logo">
+        <p class="text">Your final score: </p><span class="score"></span>
+        <div class="center">
+          <input class="button" type="button" value="Start">
         </div>
       </main>  
     `);
 
     document.body.prepend(gameOverScreen);
 
-    logoElement = document.querySelector('img');
-    logoElement.classList.add('logo');
-
-    pElement = document.querySelector('p');
-    pElement.classList.add('text');
-
-    div2Element = document.querySelector('div');
-    div2Element.classList.add('center');
-
     restartButton = document.querySelector('input');
-    restartButton.classList.add('button');
 
     restartButton.addEventListener('click', destroyGameOverScreen)
 
