@@ -1,8 +1,9 @@
 function Game() {
   //this.onGameOverCallback
   this.timeLeft = null;
-  this.lives = 0; 
+  this.lives = 2; 
   this.score = 0;  
+  this.numberHoles = 5;
   this.grid = [];
   this.gridElementTypes = []; 
   this.level = 1;
@@ -54,30 +55,40 @@ Game.prototype.start = function() {
   document.body.prepend(this.gameScreen);
 
   this.timeElement = this.gameScreen.querySelector('.time');
-  this.timeElement.innerText = 0;
+  this.timeLeft = 25;
+  this.timeElement.innerText = this.timeLeft;
 
   this.livesNoElement = this.gameScreen.querySelector('.livesNumber');
-  this.livesNoElement.innerText = 2;
+  this.livesNoElement.innerText = this.lives;
 
-  //this.score = 0; 
   this.scoreNoElement = this.gameScreen.querySelector('.scoreNumber');
-  this.scoreNoElement.innerText = 0
+  this.scoreNoElement.innerText = this.score;
 
   this.gridElement = this.gameScreen.querySelectorAll('.grid-image');
 
   this.holePositions = [];
   
-  while(this.holePositions.length < 5) {
-      this.randomnumber = Math.floor(Math.random() * 24);
+  while(this.holePositions.length < this.numberHoles) {
+      this.randomnumber = Math.floor(Math.random() * 25);
       if(this.holePositions.indexOf(this.randomnumber) > -1) continue;
       this.holePositions[this.holePositions.length] = this.randomnumber;
+  }
+
+  this.diglettPosition = Math.floor(Math.random() * this.numberHoles);
+  this.diglett = this.holePositions[this.diglettPosition];
+
+  this.timePositions = [];
+  
+  while(this.timePositions.length < this.numberHoles) {
+      this.randomnumber = Math.floor(Math.random() * 20) + 5;
+      this.timePositions[this.timePositions.length] = this.randomnumber;
   }
   
   for(i = 0; i < 25; i++) {
     this.gridElement[i].classList.add('ground');
   }
 
-  for(j = 0; j < 5; j++) {
+  for(j = 0; j < this.numberHoles; j++) {
     this.gridElement[this.holePositions[j]].classList.add('hole');
   }
 
@@ -89,44 +100,54 @@ Game.prototype.start = function() {
   }.bind(this)
 
   document.addEventListener('click', this.handleClick);
-
   this.startTimer();
 }
 
 Game.prototype.startTimer = function() {
-  this.timeLeft = 20;
-  this.timeElement.innerText = this.timeLeft;
-
-  this.dittoPositions = this.holePositions;
-
   this.intervalId = setInterval(function() {
     this.timeLeft--;
     this.timeElement.innerText = this.timeLeft;
 
-    if(this.timeLeft === 18) this.createDitto(this.dittoPositions[0]);
-    if(this.timeLeft === 15) this.createDitto(this.dittoPositions[1]);
-    if(this.timeLeft === 12) this.createDitto(this.dittoPositions[2]);
-    if(this.timeLeft === 9) this.createDitto(this.dittoPositions[3]);
-    if(this.timeLeft === 6) this.createDitto(this.dittoPositions[4]);
-    if(this.timeLeft === 3) this.createDitto(this.dittoPositions[0]);
-
-    if (this.timeLeft === 0) {
-      clearInterval(this.intervalId);
-      this.finishGame();
+    for(k = 0; k < this.numberHoles; k++) {
+      if(this.timeLeft === this.timePositions[k]) this.createPokemon(this.holePositions[k]);
     }
 
-  }.bind(this), 1000);
+    if (this.timeLeft === 0) {
+      if(this.level === 5) this.finishGame();
+      else {
+      clearInterval(this.intervalId);
+      this.numberHoles = this.numberHoles + 5;
+      this.levelUp();
+      }
+    }
+
+  }.bind(this), 500);
 }
 
-Game.prototype.createDitto = function(position) {  
-  this.gridElement[position].classList.add('ditto');
+Game.prototype.levelUp = function() {
+  document.removeEventListener('click', this.handleClick);
+  this.gameScreen.remove();
+  this.level++;
+  this.levelNoElement.innerText = this.level;
+  this.start();
+}
+
+
+Game.prototype.createPokemon = function(position) {  
+  if (this.diglett === position) this.gridElement[position].classList.add('diglett');
+  else {
+    this.gridElement[position].classList.add('ditto');
+  }
 }
 
 Game.prototype.checkHit = function(event) {
   this.target = event.target;
-  if(this.target.classList.contains('ditto')) { 
+  if (this.lives === 1 && this.target.classList.contains('diglett')) {
+    clearInterval(this.intervalId);
+    this.finishGame();
+  } else if(this.target.classList.contains('ditto')) { 
     this.target.classList.remove('ditto');
-    this.score = this.score + 25;
+    this.score += (this.timeLeft % 25)  * 25;
     this.scoreNoElement.innerText = this.score;
   } else if(this.target.classList.contains('diglett')) { 
     this.target.classList.remove('diglett');
@@ -150,6 +171,7 @@ Game.prototype.setGameOverCallback = function(callback) {
 }
 
 Game.prototype.finishGame = function() {
+  document.removeEventListener('click', this.handleClick);
   this.gameScreen.remove();
   this.gameOverCallback();
 }

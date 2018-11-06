@@ -9,13 +9,9 @@ function buildDOM(html) {
 function main() {
 
   var splashScreen;
-  var gameScreen;
+
   var gameOverScreen;
 
-  var logoElement;
-  var ulElement;
-  var liElement;
-  var divElement;
   var startButton;
 
   var pElement;
@@ -28,9 +24,9 @@ function main() {
     splashScreen = buildDOM(`
       <main>
       <img class="logo" alt="Whack-a-ditto logo">
-        <ul>Instructions:</ul>
-        <li>Hit all the Dittos that are impersonating our beloved Diglett</li>
-        <li>If you hit a Diglett by mistake, you lose one live!</li>
+        <ul class="text">Instructions:</ul>
+        <li class="text">Hit all the Dittos that are impersonating our beloved Diglett</li>
+        <li class ="text">If you hit a Diglett by mistake, you lose one live!</li>
         <div class="center">
           <input class="button" type="button" value="Start">
         </div>
@@ -38,13 +34,6 @@ function main() {
     `)
 
     document.body.prepend(splashScreen);
-
-    ulElement = document.querySelector('ul');
-    ulElement.classList.add('text');
-
-    liElement = document.querySelectorAll('li');
-    liElement[0].classList.add('text');
-    liElement[1].classList.add('text');
 
     startButton = document.querySelector('input');
 
