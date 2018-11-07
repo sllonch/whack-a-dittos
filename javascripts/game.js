@@ -1,16 +1,12 @@
 function Game() {
-  //this.onGameOverCallback
   this.timeLeft = null;
   this.lives = 2; 
   this.score = 0;  
   this.numberHoles = 5;
-  this.grid = [];
-  this.gridElementTypes = []; 
   this.level = 1;
 }
 
 Game.prototype.start = function() {
-
   this.gameScreen = buildDOM(`
     <main>
       <img class="logo" alt="Whack-a-ditto logo">
@@ -92,8 +88,11 @@ Game.prototype.start = function() {
     this.gridElement[this.holePositions[j]].classList.add('hole');
   }
 
+  this.levelElement = this.gameScreen.querySelector('.level');
   this.levelNoElement = this.gameScreen.querySelector('.levelNumber');
-  this.levelNoElement.innerText = this.level;
+  if(this.level === 5) {
+    this.levelElement.innerText = 'Final level';
+  } else this.levelNoElement.innerText = this.level;
 
   this.handleClick = function(event){
     this.checkHit(event);
@@ -121,14 +120,13 @@ Game.prototype.startTimer = function() {
       }
     }
 
-  }.bind(this), 500);
+  }.bind(this), 1000);
 }
 
 Game.prototype.levelUp = function() {
   document.removeEventListener('click', this.handleClick);
   this.gameScreen.remove();
   this.level++;
-  this.levelNoElement.innerText = this.level;
   this.start();
 }
 
@@ -145,26 +143,16 @@ Game.prototype.checkHit = function(event) {
   if (this.lives === 1 && this.target.classList.contains('diglett')) {
     clearInterval(this.intervalId);
     this.finishGame();
-  } else if(this.target.classList.contains('ditto')) { 
-    this.target.classList.remove('ditto');
-    this.score += (this.timeLeft % 25)  * 25;
-    this.scoreNoElement.innerText = this.score;
   } else if(this.target.classList.contains('diglett')) { 
     this.target.classList.remove('diglett');
     this.lives--;
     this.livesNoElement.innerText = this.lives;
+  } else if(this.target.classList.contains('ditto')) { 
+    this.target.classList.remove('ditto');
+    this.score += (this.timeLeft % 25)  * 25;
+    this.scoreNoElement.innerText = this.score;
   }
 }
-
-//Game.prototype.score = function() {
-  //this.addScore = 25;
-  //this.scoreNoElement.innerText = this.addScore;
-//}
-
-//Game.prototype.killDitto = function() {
-//  this.gridElement[position].classList.add('hole');
-//  this.score += 25;
-//}
 
 Game.prototype.setGameOverCallback = function(callback) {
   this.gameOverCallback = callback;

@@ -1,14 +1,6 @@
 @font-face {
-  font-family: "Digi";
-  src: url("fonts/ds-digib.ttf");
-}
-@font-face {
-  font-family: "PokeSolid";
-  src: url("fonts/Pokemon\ Solid.ttf");
-}
-@font-face {
-  font-family: "PokeHollow";
-  src: url("fonts/Pokemon\ Hollow.ttf");
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Regular.ttf");
 }
 
 /* ---- reset ---- */
@@ -33,11 +25,33 @@ body {
   max-width: 100%;
 }
 
+.left.text {
+  text-align: left;
+}
+
+.title.text {
+  text-align: center;
+  font-family: "Montserrat";
+  font-size: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  text-decoration-line: underline;
+}
+
 .game-over-logo {        
   display: block;
   margin-left: auto;
   margin-right: auto;
-  content: url("../images/gameOver.png");
+  content: url("../images/game-over.png");
+  max-width: 100%;
+}
+
+.game-elements {        
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  content: url("../images/game-elements.png");
   max-width: 100%;
 }
 
@@ -79,22 +93,32 @@ body {
 
 .text {
   text-align: center;
-  font-family: "PokeSolid";
-  font-size: 20px;
+  font-family: "Montserrat";
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+.text-container {
+  background-color: red;
+  height: 120px;
+  width: 600px;
+  margin: 0 auto;
 }
 
 .button{
   display: inline-block;
   padding: 15px;
   margin-right: 5px;
-  margin-top: 100px;
+  margin-top: 5px;
   height: 50px;
   min-width: 100px;
   background: #348AA7;
   border: none;
   outline: none;
   color: white;
-  font-family: "PokeSolid";
+  font-family: "Montserrat";
   text-align:center;
   font-weight: 400;
   font-size: 20px;
@@ -129,6 +153,7 @@ body {
   width: 400px;
   margin: 0 auto;
 }
+
 .grid-item {
   height: auto;
   width: auto;
