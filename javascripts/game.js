@@ -80,12 +80,14 @@ Game.prototype.start = function() {
       this.timePositions[this.timePositions.length] = this.randomnumber;
   }
   
-  for(i = 0; i < 25; i++) {
+
+
+  for(var i = 0; i < 25; i++) {
     this.gridElement[i].classList.add('ground');
   }
 
-  for(j = 0; j < this.numberHoles; j++) {
-    this.gridElement[this.holePositions[j]].classList.add('hole');
+  for(var i = 0; i < this.numberHoles; i++) {
+    this.gridElement[this.holePositions[i]].classList.add('hole');
   }
 
   this.levelElement = this.gameScreen.querySelector('.level');
@@ -106,11 +108,9 @@ Game.prototype.startTimer = function() {
   this.intervalId = setInterval(function() {
     this.timeLeft--;
     this.timeElement.innerText = this.timeLeft;
-
-    for(k = 0; k < this.numberHoles; k++) {
-      if(this.timeLeft === this.timePositions[k]) this.createPokemon(this.holePositions[k]);
+    for(var i = 0; i < this.numberHoles; i++) {
+      if(this.timeLeft === this.timePositions[i]) this.createPokemon(this.holePositions[i]);
     }
-
     if (this.timeLeft === 0) {
       if(this.level === 5) this.finishGame();
       else {
@@ -119,7 +119,6 @@ Game.prototype.startTimer = function() {
       this.levelUp();
       }
     }
-
   }.bind(this), 1000);
 }
 

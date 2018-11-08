@@ -55,14 +55,32 @@ body {
   max-width: 100%;
 }
 
+.game-elements {        
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  content: url("../images/game-elements.png");
+  max-width: 100%;
+}
+
 .ground {        
   display: block;
   margin-left: auto;
   margin-right: auto;
-  content: url("../images/ground.jpg");
+  content: url("../images/ground.jpeg");
   height: 80px;
   width: 80px;
 }
+
+.field {        
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  content: url("../images/field-background.jpg");
+  height: 80px;
+  width: 80px;
+}
+
 
 .hole {        
   display: block;
@@ -77,7 +95,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  content: url("../images/diglett.jpg");
+  content: url("../images/diglett.jpeg");
   height: 80px;
   width: 80px;
 }
@@ -86,7 +104,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  content: url("../images/diglett.jpg");
+  content: url("../images/diglett.jpeg");
   height: 80px;
   width: 80px;
 }
@@ -102,8 +120,15 @@ body {
 
 .text-container {
   background-color: red;
-  height: 120px;
+  height: 140px;
   width: 600px;
+  margin: 0 auto;
+}
+
+.highscores-container {
+  background-color: red;
+  height: 250px;
+  width: 500px;
   margin: 0 auto;
 }
 
@@ -152,6 +177,65 @@ body {
   height: 400px;
   width: 400px;
   margin: 0 auto;
+}
+
+.game-over-container {
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+#instructions{
+  display: none;
+}
+
+#instructions.show{
+  display: block;
+}
+
+#game-gif{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  content: url("../images/diglett-gif.gif");
+}
+
+#game-gif.hide{
+  display: none;
+}
+
+.magikarp {        
+  content: url("../images/magikarp.gif");
+  max-width: none;
+}
+
+.psyduck {        
+  content: url("../images/psyduck.gif");
+  max-width: none;
+}
+
+.kadabra {        
+  content: url("../images/kadabra.gif");
+  max-width: none;
+}
+
+.gengar {        
+  content: url("../images/gengar.gif");
+  max-width: none;
+}
+
+.mewtwo {        
+  content: url("../images/mewtwo.gif");
+  max-width: none;
+}
+
+.mew {        
+  content: url("../images/mew.gif");
+  max-width: none;
 }
 
 .grid-item {

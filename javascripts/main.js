@@ -9,14 +9,29 @@ function buildDOM(html) {
 function main() {
   var splashScreen;
   var gameOverScreen;
+  var highscoresScreen;
   var startButton;
+  //var highscoresButton;
   var scoreNoElement;
   var restartButton;
+  var backButton;
+  var rank;
+  //var scores = [];
+  //var scoresObj = {
+  //  name: null,
+  //  rank: null,
+  //  score: null,
+  //};
+  var gameOverContainer;
   
   function buildSplash() {
     splashScreen = buildDOM(`
       <main>
         <img class="logo" alt="Whack-a-ditto logo">
+        <div class="center">
+        <img id="game-gif" alt="ditto-gif">
+        </div>
+        <div id="instructions">
         <p class="text title">Instructions:</p>
         <div class="text-container">
           <li class="text left">Get the max score hitting as many diglett-shaped dittos as possible avoiding hitting any diglett</li>
@@ -24,17 +39,31 @@ function main() {
           <li class="text left">Watch out! Dittos and digletts look identical</li>
           <li class="text left">There is only ONE diglett in each level</li>
         </div>
-        <p class="text title">Game elements:</p>
         <img class="game-elements" alt="Game elements">
+        </div>
         <div class="center">
-          <input class="button" type="button" value="Start">
+          <input class="button start" type="button" value="Start">
+          <input class="button" id="instructionsbtn" type="button" value="Show/Hide instructions"> 
         </div>
       </main>
     `)
-
+//<input class="button highscores" type="button" value="Highscores">
     document.body.prepend(splashScreen);
-    startButton = document.querySelector('input');
+
+    var instructionsButton  = document.getElementById('instructionsbtn');
+    var instructions = document.getElementById('instructions');
+    var gif = document.getElementById('game-gif');
+
+    instructionsButton.addEventListener('click', function() {
+      instructions.classList.toggle('show');
+      gif.classList.toggle('hide');
+    });
+
+    startButton = document.querySelector('.start');
     startButton.addEventListener('click', destroySplash);
+
+    //highscoresButton = document.querySelector('.highscores');
+    //highscoresButton.addEventListener('click', destroySplash2);
   }
 
   function destroySplash() {
@@ -42,6 +71,12 @@ function main() {
     startButton.removeEventListener('click', destroySplash);
     buildGameScreen();
   }
+
+  //function destroySplash2() {
+  //  splashScreen.remove();
+  //  highscoresButton.removeEventListener('click', destroySplash2);
+  //  buildHighscoresScreen();
+  //}
 
   function buildGameScreen() {
     var game = new Game();
@@ -62,21 +97,102 @@ function main() {
     gameOverScreen = buildDOM(`
       <main>
         <img class="game-over-logo" alt="Game Over logo">
-        <p class="score text">Your final score: <span class="scoreNumber"></span></p>
+        <p class="text">Your final score: <span class="scoreNumber"></span></p>
+        <p class="text">RANK: <span class="rank"></span></p>
+        <div class="game-over-container">
+        </div>
         <div class="center">
-          <input class="button" type="button" value="Start again">
+          <input class="button restart" type="button" value="Start again">
         </div>
       </main>  
     `);
+
+    //<div class="center">
+    //  <label for="name" class="text">Name initials (3 characters):</label>
+    //  <input class="input" type="text" id="name" name="name" required minlength="3" maxlength="3" size="3">
+    //</div>
 
     document.body.prepend(gameOverScreen);
     
     scoreNoElement = document.querySelector('.scoreNumber');
     scoreNoElement.innerText = score;
+    //scoresObj.score = score;
 
-    restartButton = document.querySelector('input');
+    gameOverContainer = document.querySelector('.game-over-container');
+    rank = document.querySelector('.rank');
+
+    if(score < 3000) {
+      rank.innerText = 'MAGIKARP';
+      //scoresObj.rank = 'MAGIKARP';
+      gameOverContainer.classList.add('magikarp');
+    } else if(score < 6000) {
+      rank.innerText = 'PSYDUCK';
+      //scoresObj.rank = 'PSYDUCK';
+      gameOverContainer.classList.add('psyduck');
+    } else if(score < 9000) {
+      rank.innerText = 'KADABRA';
+      //scoresObj.rank = 'KADABRA';
+      gameOverContainer.classList.add('kadabra');
+    } else if(score < 12000) {
+      rank.innerText = 'GENGAR';
+      //scoresObj.rank = 'GENGAR';
+      gameOverContainer.classList.add('gengar');
+    } else if(score < 15000) {
+      rank.innerText = 'MEWTWO';
+      //scoresObj.rank = 'MEWTWO';
+      gameOverContainer.classList.add('mewtwo');
+    } else {
+      rank.innerText = 'MEW';
+      //scoresObj.rank = 'MEW';
+      gameOverContainer.classList.add('mew');
+    }
+
+    //scoresObj.name = document.querySelector('.input').value;
+    //scores.push(scoresObj);
+    //localStorage.setItem('score', JSON.stringify(scores[scores.length -1]));
+
+    restartButton = document.querySelector('.restart');
     restartButton.addEventListener('click', destroyGameOverScreen)
   }
+
+
+  //function buildHighscoresScreen() {
+
+  //  highscoresScreen = buildDOM(`
+  //  <main>
+  //    <img class="logo" alt="Whack-a-ditto logo">
+  //    <p class="text title">Highscores:</p>
+  //    <ol class="highscores-container">
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //      <li class="text left"></li>
+  //    </ol>
+  //    <div class="center">
+  //      <input class="button back" type="button" value="Back">
+  //    </div>
+  //  </main>
+  //`)
+
+  //  document.body.prepend(highscoresScreen);
+
+  //  scoresParsed = JSON.parse(localStorage.getItem('scores'));
+  
+  //  backButton = document.querySelector('.back');
+  //  backButton.addEventListener('click', destroyHighscoresScreen);
+  //}
+
+  //function destroyHighscoresScreen() {
+  //  highscoresScreen.remove();
+  //  backButton.removeEventListener('click', destroyHighscoresScreen);
+  //  buildSplash();
+  //}
 
   function destroyGameOverScreen() {
     gameOverScreen.remove();
