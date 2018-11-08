@@ -29,7 +29,7 @@ function main() {
       <main>
         <img class="logo" alt="Whack-a-ditto logo">
         <div class="center">
-        <img id="game-gif" alt="ditto-gif">
+        <img id="game-gif" class="hammer" alt="ditto-gif">
         </div>
         <div id="instructions">
         <p class="text title">Instructions:</p>
