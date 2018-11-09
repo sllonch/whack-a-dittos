@@ -28,9 +28,13 @@ Game() {
 
 Game.prototype.start = function () {
   this.gameScreen = buildDOM
+  this.soundGame
+  this.soundSmash
+  this.soundDiglett
   this.timeElement
   this.livesNoElement
   this.scoreNoElement
+  this.page
   this.gridElement
   this.holePositions
   this.diglettPosition
@@ -44,7 +48,7 @@ Game.prototype.start = function () {
 
 Game.prototype.startTimer = function() {
 
-  this.timeLeft = 25;
+  this.timeLeft = 20;
   this.timeElement.innerText = this.timeLeft;
 
   this.intervalId = setInterval(function() { 

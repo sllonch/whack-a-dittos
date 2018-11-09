@@ -106,7 +106,7 @@ function main() {
         </div>
         <div class="center">
           <input class="button restart" type="button" value="Play again">
-          <input class="button go-back" type="button" value="Go to main page"> 
+          <input class="button go-main" type="button" value="Go to main page"> 
         </div>
       </main>  
     `);
@@ -161,7 +161,7 @@ function main() {
     restartButton = document.querySelector('.restart');
     restartButton.addEventListener('click', destroyGameOverScreen);
 
-    gobackButton = document.querySelector('.go-back');
+    gobackButton = document.querySelector('.go-main');
     gobackButton.addEventListener('click', destroyGameOverScreen2);
   }
 

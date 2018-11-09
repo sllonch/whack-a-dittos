@@ -248,8 +248,8 @@ body {
   cursor: url("../images/hammer.png"), auto;   
 }
 
+/* Shaky effect when hitting a diglett */
 .shaky {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.7s; 
 }
 
@@ -267,6 +267,7 @@ body {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+/* Game border */
 .other {
   box-shadow: 6px 0 black, -6px 0 black, 0 -6px black, 0 6px black;
   margin: 6px auto;
