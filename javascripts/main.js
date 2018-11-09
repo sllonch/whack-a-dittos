@@ -12,7 +12,7 @@ function main() {
   //var highscoresScreen;
   var startButton;
   //var highscoresButton;
-  var sound;
+  var soundGameOver;
   var scoreNoElement;
   var restartButton;
   var gobackButton;
@@ -118,8 +118,8 @@ function main() {
 
     document.body.prepend(gameOverScreen);
 
-    sound = document.getElementById("audio");
-    sound.play();
+    soundGameOver = document.getElementById("audio");
+    soundGameOver.play();
     
     scoreNoElement = document.querySelector('.scoreNumber');
     scoreNoElement.innerText = score;

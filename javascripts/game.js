@@ -11,13 +11,15 @@ Game.prototype.start = function() {
     <main>
       <div class="whole-page">
       <img class="logo" alt="Whack-a-ditto logo">
-      <audio id="audio" src="sounds/battle.mp3"></audio>
+      <audio id="audioGame" src="sounds/battle.mp3"></audio>
+      <audio id="audioSmash" src="sounds/smash.mp3"></audio>
+      <audio id="audioDiglett" src="sounds/diglett.m4a"></audio>
       <header>
         <p class="countdown text">Countdown: <span class="time"></span></p>
         <p class="lives text">Lives: <span class="livesNumber"></span></p>
         <p class="score text">Score: <span class="scoreNumber"></span></p>
       </header>
-      <div class="grid-container hammer">
+      <div class="grid-container hammer other">
         <div class="grid-item"><img class="grid-image" src="" alt=""></div>
         <div class="grid-item"><img class="grid-image" src="" alt=""></div>
         <div class="grid-item"><img class="grid-image" src="" alt=""></div>  
@@ -53,8 +55,10 @@ Game.prototype.start = function() {
 
   document.body.prepend(this.gameScreen);
 
-  this.sound = document.getElementById("audio");
-  this.sound.play();
+  this.soundGame = document.getElementById("audioGame");
+  this.soundSmash = document.getElementById("audioSmash");
+  this.soundDiglett = document.getElementById("audioDiglett");
+  this.soundGame.play();
 
   this.timeElement = this.gameScreen.querySelector('.time');
   this.timeLeft = 20;
@@ -146,14 +150,17 @@ Game.prototype.createPokemon = function(position) {
 Game.prototype.checkHit = function(event) {
   this.target = event.target;
   if (this.lives === 1 && this.target.classList.contains('diglett')) {
+    this.soundDiglett.play();
     clearInterval(this.intervalId);
     this.finishGame();
   } else if(this.target.classList.contains('diglett')) { 
+    this.soundDiglett.play();
     this.page.classList.add('shaky');
     this.target.classList.remove('diglett');
     this.lives--;
     this.livesNoElement.innerText = this.lives;
   } else if(this.target.classList.contains('ditto')) { 
+    this.soundSmash.play();
     this.target.classList.remove('ditto');
     this.score += (this.timeLeft % 25)  * 25;
     this.scoreNoElement.innerText = this.score;
