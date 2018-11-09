@@ -15,6 +15,7 @@ function main() {
   var sound;
   var scoreNoElement;
   var restartButton;
+  var gobackButton;
   //var backButton;
   var rank;
   //var scores = [];
@@ -104,7 +105,8 @@ function main() {
         <div class="game-over-container">
         </div>
         <div class="center">
-          <input class="button restart" type="button" value="Start again">
+          <input class="button restart" type="button" value="Play again">
+          <input class="button go-back" type="button" value="Go to main page"> 
         </div>
       </main>  
     `);
@@ -126,23 +128,23 @@ function main() {
     gameOverContainer = document.querySelector('.game-over-container');
     rank = document.querySelector('.rank');
 
-    if(score < 8000) {
+    if(score < 7000) {
       rank.innerText = 'MAGIKARP';
       //scoresObj.rank = 'MAGIKARP';
       gameOverContainer.classList.add('magikarp');
-    } else if(score < 10000) {
+    } else if(score < 9000) {
       rank.innerText = 'PSYDUCK';
       //scoresObj.rank = 'PSYDUCK';
       gameOverContainer.classList.add('psyduck');
-    } else if(score < 12000) {
+    } else if(score < 11000) {
       rank.innerText = 'KADABRA';
       //scoresObj.rank = 'KADABRA';
       gameOverContainer.classList.add('kadabra');
-    } else if(score < 14000) {
+    } else if(score < 13000) {
       rank.innerText = 'GENGAR';
       //scoresObj.rank = 'GENGAR';
       gameOverContainer.classList.add('gengar');
-    } else if(score < 16000) {
+    } else if(score < 15000) {
       rank.innerText = 'MEWTWO';
       //scoresObj.rank = 'MEWTWO';
       gameOverContainer.classList.add('mewtwo');
@@ -157,7 +159,10 @@ function main() {
     //localStorage.setItem('score', JSON.stringify(scores[scores.length -1]));
 
     restartButton = document.querySelector('.restart');
-    restartButton.addEventListener('click', destroyGameOverScreen)
+    restartButton.addEventListener('click', destroyGameOverScreen);
+
+    gobackButton = document.querySelector('.go-back');
+    gobackButton.addEventListener('click', destroyGameOverScreen2);
   }
 
 
@@ -204,6 +209,13 @@ function main() {
     restartButton.removeEventListener('click', destroyGameOverScreen)
     buildGameScreen();
   }
+
+  function destroyGameOverScreen2() {
+    gameOverScreen.remove();
+    restartButton.removeEventListener('click', destroyGameOverScreen2)
+    buildSplash();
+  }
+
   buildSplash();
 }
 
