@@ -9,12 +9,13 @@ function buildDOM(html) {
 function main() {
   var splashScreen;
   var gameOverScreen;
-  var highscoresScreen;
+  //var highscoresScreen;
   var startButton;
   //var highscoresButton;
+  var sound;
   var scoreNoElement;
   var restartButton;
-  var backButton;
+  //var backButton;
   var rank;
   //var scores = [];
   //var scoresObj = {
@@ -97,6 +98,7 @@ function main() {
     gameOverScreen = buildDOM(`
       <main>
         <img class="game-over-logo" alt="Game Over logo">
+        <audio id="audio" src="sounds/gameover.mp3"></audio>
         <p class="text">Your final score: <span class="scoreNumber"></span></p>
         <p class="text">RANK: <span class="rank"></span></p>
         <div class="game-over-container">
@@ -113,6 +115,9 @@ function main() {
     //</div>
 
     document.body.prepend(gameOverScreen);
+
+    sound = document.getElementById("audio");
+    sound.play();
     
     scoreNoElement = document.querySelector('.scoreNumber');
     scoreNoElement.innerText = score;
@@ -121,23 +126,23 @@ function main() {
     gameOverContainer = document.querySelector('.game-over-container');
     rank = document.querySelector('.rank');
 
-    if(score < 3000) {
+    if(score < 8000) {
       rank.innerText = 'MAGIKARP';
       //scoresObj.rank = 'MAGIKARP';
       gameOverContainer.classList.add('magikarp');
-    } else if(score < 6000) {
+    } else if(score < 10000) {
       rank.innerText = 'PSYDUCK';
       //scoresObj.rank = 'PSYDUCK';
       gameOverContainer.classList.add('psyduck');
-    } else if(score < 9000) {
+    } else if(score < 12000) {
       rank.innerText = 'KADABRA';
       //scoresObj.rank = 'KADABRA';
       gameOverContainer.classList.add('kadabra');
-    } else if(score < 12000) {
+    } else if(score < 14000) {
       rank.innerText = 'GENGAR';
       //scoresObj.rank = 'GENGAR';
       gameOverContainer.classList.add('gengar');
-    } else if(score < 15000) {
+    } else if(score < 16000) {
       rank.innerText = 'MEWTWO';
       //scoresObj.rank = 'MEWTWO';
       gameOverContainer.classList.add('mewtwo');

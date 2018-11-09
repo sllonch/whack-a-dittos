@@ -1,6 +1,6 @@
 function Game() {
   this.timeLeft = null;
-  this.lives = 2; 
+  this.lives = 3; 
   this.score = 0;  
   this.numberHoles = 5;
   this.level = 1;
@@ -9,7 +9,9 @@ function Game() {
 Game.prototype.start = function() {
   this.gameScreen = buildDOM(`
     <main>
+      <div class="whole-page">
       <img class="logo" alt="Whack-a-ditto logo">
+      <audio id="audio" src="sounds/battle.mp3"></audio>
       <header>
         <p class="countdown text">Countdown: <span class="time"></span></p>
         <p class="lives text">Lives: <span class="livesNumber"></span></p>
@@ -45,13 +47,17 @@ Game.prototype.start = function() {
       <footer>
         <p class="level text"> Level <span class="levelNumber"></span></p>
       </footer>
+      </div>
     </main>
   `);
 
   document.body.prepend(this.gameScreen);
 
+  this.sound = document.getElementById("audio");
+  this.sound.play();
+
   this.timeElement = this.gameScreen.querySelector('.time');
-  this.timeLeft = 25;
+  this.timeLeft = 20;
   this.timeElement.innerText = this.timeLeft;
 
   this.livesNoElement = this.gameScreen.querySelector('.livesNumber');
@@ -59,6 +65,8 @@ Game.prototype.start = function() {
 
   this.scoreNoElement = this.gameScreen.querySelector('.scoreNumber');
   this.scoreNoElement.innerText = this.score;
+
+  this.page = this.gameScreen.querySelector('.whole-page');
 
   this.gridElement = this.gameScreen.querySelectorAll('.grid-image');
 
@@ -76,12 +84,10 @@ Game.prototype.start = function() {
   this.timePositions = [];
   
   while(this.timePositions.length < this.numberHoles) {
-      this.randomnumber = Math.floor(Math.random() * 20) + 5;
+      this.randomnumber = Math.floor(Math.random() * 15) + 5;
       this.timePositions[this.timePositions.length] = this.randomnumber;
   }
   
-
-
   for(var i = 0; i < 25; i++) {
     this.gridElement[i].classList.add('ground');
   }
@@ -143,6 +149,7 @@ Game.prototype.checkHit = function(event) {
     clearInterval(this.intervalId);
     this.finishGame();
   } else if(this.target.classList.contains('diglett')) { 
+    this.page.classList.add('shaky');
     this.target.classList.remove('diglett');
     this.lives--;
     this.livesNoElement.innerText = this.lives;
