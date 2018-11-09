@@ -160,6 +160,7 @@ Game.prototype.checkHit = function(event) {
     this.lives--;
     this.livesNoElement.innerText = this.lives;
   } else if(this.target.classList.contains('ditto')) { 
+    this.soundSmash.currentTime = 0;
     this.soundSmash.play();
     this.target.classList.remove('ditto');
     this.score += (this.timeLeft % 25)  * 25;
