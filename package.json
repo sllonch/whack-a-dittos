@@ -1,0 +1,27 @@
+{
+  "name": "whack-a-dittos",
+  "version": "1.0.0",
+  "description": "## Description Whack-a-diglett is a simple click game where you have to smash the Dittos that are trying to impersonate Diglett. Every smashed Ditto adds points into your scoreboard… but careful: if you are wrong and you smash our lovely Diglett by mistake, you die.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sllonch/whack-a-dittos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sllonch/whack-a-dittos/issues"
+  },
+  "homepage": "https://github.com/sllonch/whack-a-dittos#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
+}
