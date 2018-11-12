@@ -1,32 +1,32 @@
 'use strict';
 
-function buildDOM (html) {
-  var div = document.createElement('div');
+const buildDOM = html => {
+  const div = document.createElement('div');
   div.innerHTML = html;
   return div.children[0];
-}
+};
 
-function main () {
-  var splashScreen;
-  var gameOverScreen;
-  // var highscoresScreen;
-  var startButton;
-  // var highscoresButton;
-  var soundGameOver;
-  var scoreNoElement;
-  var restartButton;
-  var gobackButton;
-  // var backButton;
-  var rank;
-  // var scores = [];
-  // var scoresObj = {
+const main = () => {
+  let splashScreen;
+  let gameOverScreen;
+  // let highscoresScreen;
+  let startButton;
+  // let highscoresButton;
+  let soundGameOver;
+  let scoreNoElement;
+  let restartButton;
+  let gobackButton;
+  // let backButton;
+  let rank;
+  // let scores = [];
+  // const scoresObj = {
   //  name: null,
   //  rank: null,
   //  score: null,
   // };
-  var gameOverContainer;
+  let gameOverContainer;
 
-  function buildSplash () {
+  const buildSplash = () => {
     splashScreen = buildDOM(`
       <main>
         <img class="logo" alt="Whack-a-ditto logo">
@@ -52,11 +52,11 @@ function main () {
     // <input class="button highscores" type="button" value="Highscores">
     document.body.prepend(splashScreen);
 
-    var instructionsButton = document.getElementById('instructionsbtn');
-    var instructions = document.getElementById('instructions');
-    var gif = document.getElementById('game-gif');
+    const instructionsButton = document.getElementById('instructionsbtn');
+    const instructions = document.getElementById('instructions');
+    const gif = document.getElementById('game-gif');
 
-    instructionsButton.addEventListener('click', function () {
+    instructionsButton.addEventListener('click', () => {
       instructions.classList.toggle('show');
       gif.classList.toggle('hide');
     });
@@ -66,34 +66,34 @@ function main () {
 
     // highscoresButton = document.querySelector('.highscores');
     // highscoresButton.addEventListener('click', destroySplash2);
-  }
+  };
 
-  function destroySplash () {
+  const destroySplash = () => {
     splashScreen.remove();
     startButton.removeEventListener('click', destroySplash);
     buildGameScreen();
-  }
+  };
 
-  // function destroySplash2() {
+  // const destroySplash2 = () => {
   //  splashScreen.remove();
   //  highscoresButton.removeEventListener('click', destroySplash2);
   //  buildHighscoresScreen();
   // }
 
-  function buildGameScreen () {
-    var game = new Game();
+  const buildGameScreen = () => {
+    const game = new Game();
 
     game.start();
-    game.setGameOverCallback(function () {
+    game.setGameOverCallback(() => {
       destroyGameScreen(game.score);
     });
-  }
+  };
 
-  function destroyGameScreen (score) {
+  const destroyGameScreen = score => {
     buildGameOverScreen(score);
-  }
+  };
 
-  function buildGameOverScreen (score) {
+  const buildGameOverScreen = score => {
     gameOverScreen = buildDOM(`
       <main>
         <img class="game-over-logo" alt="Game Over logo">
@@ -161,9 +161,9 @@ function main () {
 
     gobackButton = document.querySelector('.go-main');
     gobackButton.addEventListener('click', destroyGameOverScreen2);
-  }
+  };
 
-  // function buildHighscoresScreen() {
+  // const buildHighscoresScreen = () => {
 
   //  highscoresScreen = buildDOM(`
   //  <main>
@@ -201,19 +201,19 @@ function main () {
   //  buildSplash();
   // }
 
-  function destroyGameOverScreen () {
+  const destroyGameOverScreen = () => {
     gameOverScreen.remove();
     restartButton.removeEventListener('click', destroyGameOverScreen);
     buildGameScreen();
-  }
+  };
 
-  function destroyGameOverScreen2 () {
+  const destroyGameOverScreen2 = () => {
     gameOverScreen.remove();
     restartButton.removeEventListener('click', destroyGameOverScreen2);
     buildSplash();
-  }
+  };
 
   buildSplash();
-}
+};
 
 window.addEventListener('load', main);
