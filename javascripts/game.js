@@ -9,45 +9,6 @@ class Game {
     this.level = 1;
   }
 
-  startTimer () {
-    this.intervalId = setInterval(() => {
-      this.timeLeft--;
-      this.timeElement.innerText = this.timeLeft;
-      for (let i = 0; i < this.numberHoles; i++) {
-        if (this.timeLeft === this.timePositions[i]) this.createPokemon(this.holePositions[i]);
-      }
-      if (this.timeLeft === 0) {
-        if (this.level === 5) this.finishGame();
-        else {
-          clearInterval(this.intervalId);
-          this.numberHoles = this.numberHoles + 5;
-          this.levelUp();
-        }
-      }
-    }, 1000);
-  }
-
-  checkHit (event) {
-    this.target = event.target;
-    if (this.lives === 1 && this.target.classList.contains('diglett')) {
-      this.soundDiglett.play();
-      clearInterval(this.intervalId);
-      this.finishGame();
-    } else if (this.target.classList.contains('diglett')) {
-      this.soundDiglett.play();
-      this.page.classList.add('shaky');
-      this.target.classList.remove('diglett');
-      this.lives--;
-      this.livesNoElement.innerText = this.lives;
-    } else if (this.target.classList.contains('ditto')) {
-      this.soundSmash.currentTime = 0;
-      this.soundSmash.play();
-      this.target.classList.remove('ditto');
-      this.score += (this.timeLeft % 25) * 25;
-      this.scoreNoElement.innerText = this.score;
-    }
-  }
-
   start () {
     this.gameScreen = buildDOM(`
     <main>
@@ -154,6 +115,45 @@ class Game {
 
     document.addEventListener('click', this.handleClick);
     this.startTimer();
+  }
+
+  startTimer () {
+    this.intervalId = setInterval(() => {
+      this.timeLeft--;
+      this.timeElement.innerText = this.timeLeft;
+      for (let i = 0; i < this.numberHoles; i++) {
+        if (this.timeLeft === this.timePositions[i]) this.createPokemon(this.holePositions[i]);
+      }
+      if (this.timeLeft === 0) {
+        if (this.level === 5) this.finishGame();
+        else {
+          clearInterval(this.intervalId);
+          this.numberHoles = this.numberHoles + 5;
+          this.levelUp();
+        }
+      }
+    }, 1000);
+  }
+
+  checkHit (event) {
+    this.target = event.target;
+    if (this.lives === 1 && this.target.classList.contains('diglett')) {
+      this.soundDiglett.play();
+      clearInterval(this.intervalId);
+      this.finishGame();
+    } else if (this.target.classList.contains('diglett')) {
+      this.soundDiglett.play();
+      this.page.classList.add('shaky');
+      this.target.classList.remove('diglett');
+      this.lives--;
+      this.livesNoElement.innerText = this.lives;
+    } else if (this.target.classList.contains('ditto')) {
+      this.soundSmash.currentTime = 0;
+      this.soundSmash.play();
+      this.target.classList.remove('ditto');
+      this.score += (this.timeLeft % 25) * 25;
+      this.scoreNoElement.innerText = this.score;
+    }
   }
 
   levelUp () {
