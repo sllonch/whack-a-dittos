@@ -5,7 +5,7 @@ function buildDOM(html) {
   div.innerHTML = html;
   return div.children[0];
 }
-
+// Clean commented code
 function main() {
   var splashScreen;
   var gameOverScreen;

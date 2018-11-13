@@ -78,6 +78,7 @@ Game.prototype.start = function() {
   
   while(this.holePositions.length < this.numberHoles) {
       this.randomnumber = Math.floor(Math.random() * 25);
+      // Not a fan of continue...
       if(this.holePositions.indexOf(this.randomnumber) > -1) continue;
       this.holePositions[this.holePositions.length] = this.randomnumber;
   }
@@ -91,7 +92,7 @@ Game.prototype.start = function() {
       this.randomnumber = Math.floor(Math.random() * 15) + 5;
       this.timePositions[this.timePositions.length] = this.randomnumber;
   }
-  
+  // If you want to increase the grid it will likely not work. Use the length of the grid
   for(var i = 0; i < 25; i++) {
     this.gridElement[i].classList.add('ground');
   }
@@ -141,6 +142,7 @@ Game.prototype.levelUp = function() {
 
 
 Game.prototype.createPokemon = function(position) {  
+  // Use the normal structure of the if when doing an else, like this, it loses readability
   if (this.diglett === position) this.gridElement[position].classList.add('diglett');
   else {
     this.gridElement[position].classList.add('ditto');
